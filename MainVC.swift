@@ -23,6 +23,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         tableView.delegate = self
         tableView.dataSource = self
         
+        generateTestData()
         attemptFetch()
         
     }
@@ -76,6 +77,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
+        
+        controller.delegate = self
+        
+        self.controller = controller
+        
         do  {
             try self.controller.performFetch()
         }
@@ -128,4 +134,26 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
 
 
 }
+
+func generateTestData() {
+    
+    let item = Item(context: context)
+    item.title = "MacBoook Pro"
+    item.price = 1800
+    item.details = "I can't wait until September event, I hope they release new MBPs"
+    
+    let item2 = Item(context: context)
+    item2.title = "Bose Headphones"
+    item2.price = 300
+    item2.details = "Noise canceling is so sweet"
+    
+    let item3 = Item(context: context)
+    item3.title = "MacBoook Pro"
+    item3.price = 110000
+    item3.details = "Oh man, it's so sweet of a car!"
+    
+    //     ad.saveContext()
+    
+}
+
 
